@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Workout App</title>
+</head>
+<body>
+    <!--5/10/15 minute routine, configure how many repetitions
+        center routine - top routine, bottom current, next and previous.
+        right: music and sounds, just sounds, mute
+     -->
+    <div class="app">
+        <div class="workout_config">
+            <button data-time="300">5 minutes</button>
+            <button data-time="600">10 minutes</button>
+            <button data-time="900">15 minutes</button>
+        </div>
+        <div class="workout">
+            <div>
+                <h3 class="time-display">0:00</h3>
+            </div>
+            <!--<div class="cont-countdown-circle">
+                <h3 class="time-display">3</h3>
+                <svg width="200" height="200" viewBox="0 0 200 200" fill="none" class="outline-still">
+                    <circle cx="50" cy="50" r="50" stroke="#eaeaea" stroke-width="10" class="outline-moving"/>
+                    <circle cx="50" cy="50" r="50" stroke="#4c4c4c" stroke-width="10"/>
+                </svg>
+            </div>-->
+            <div class="current-workout">
+                <div class="cont-countdown-circle">
+                    <div class="countdown-b-circle-outer countdown-b-circle-start countdown-circle"></div>
+                    <div class="countdownCont"><span></span></div>
+                </div>
+                <div class="current-workout-img">
+                    <img src="./resources/gifs/a93c82108677535.5fc3684e78f67.gif">
+                </div>
+            </div>
+            <div>
+                <a class="play-btn" href="#">▶</a>
+            </div>
+            <audio src="./resources/sounds/funkyelement.mp3" class="song"></audio> 
+        </div>
+        <div class="sound_config">
+            <button data-sound="./resources/sounds/funkyelement.mp3">
+                <!-- data-video="./resources/video/" -->
+                Music and sonds on / Option 1
+            </button>
+            <button data-sound="./resources/sounds/funkyelement.mp3">
+                <!-- data-video="./resources/video/" -->
+                Music and sounds on / Option 2
+            </button>
+            <button data-sound="">
+                <!-- data-video="./resources/video/" -->
+                Music off / Sound on
+            </button>
+            <button data-sound="">
+                <!-- data-video="./resources/video/" -->
+                Mute all
+            </button>
+            <div></div>
+        </div>
+    </div>
+    <script src="./app.js"></script>
+</body>
+</html>

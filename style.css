@@ -1,0 +1,156 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.app{
+    height:100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.workout_config,
+.workout,
+.sound_config{
+    height:100%;
+    flex:1;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.workout_config{
+    background-color:lightskyblue
+}
+
+.workout {
+    background-color: white;
+}
+
+.sound_config{
+    background-color: aliceblue;
+}
+
+.time-display{
+    color: lightcoral;
+    font-size:40px;
+    text-align:center;
+}
+
+.current-workout{
+    height:0%;
+    overflow:hidden;
+    -webkit-transition: all 1s ease 0.5s;
+    -moz-transition: all 1s ease 0.5s;
+    -o-transition: all 1s ease 0.5s;
+    transition: all 1s ease 0.5s;
+}
+
+.current-workout-img img{
+    width: 100%;
+}
+
+button{
+    padding:10px;
+    border-radius:4px;
+    background-color:rgba(255, 255, 255, 0.8);
+    border: 1px solid #4c4c4c;
+    color:#4c4c4c;
+}
+
+button:hover{
+    background-color:rgb(110, 110, 110, 0.2);
+    box-shadow: 0px 0px 25px 4px rgba(110, 110, 110, 0.1);
+    transition: all 0.5s ease;
+}
+
+.play-btn {
+    background:coral;
+    border-radius: 50%;
+    box-shadow: 0px 0px 25px 3px rgba(255, 128, 82, 0.8);
+    color:white;
+    border: 6px solid white;
+    padding:20px;
+    text-decoration:none;
+    font-size:20px;
+    -webkit-transition: all 1s ease 0.5s;
+    -moz-transition: all 1s ease 0.5s;
+    -o-transition: all 1s ease 0.5s;
+    transition: all 1s ease 0.5s;
+  }
+
+.play-btn-on-pause {
+    font-weight: bolder;
+    border-radius:10px;
+    padding:10px 20px;
+    margin:auto;
+}
+
+/* btn hover */
+.play-btn:hover{
+    box-shadow: 0px 0px 50px 3px rgba(255, 97, 40, 0.8);
+    background: #e45825;
+}
+
+
+/*Animation circle countdown */
+.cont-countdown-circle{
+  position:relative;
+  top:25%;
+  width: 100px;
+  height:100px;
+  display:none;
+}
+
+.cont-countdown-circle div{
+  position:absolute;
+  width: 100%;
+  height:100%;
+}
+
+.countdown-b-circle-outer{
+  border-radius:100%;
+  border:5px solid;
+}
+
+.countdown-b-circle-start {
+  border-color:transparent #ecd201 #ecd201 #ecd201;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.countdown-circle {
+  animation: rotation 1s infinite linear,
+  colorchange 5s infinite linear;
+}
+
+@keyframes rotation{
+  from {-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+  to   {-webkit-transform: rotate(359deg);transform: rotate(359deg);}
+}
+
+@keyframes colorchange{
+  0%   {border-color:transparent #ecd201 #ecd201 #ecd201;}
+  20%  {border-color:transparent #ec0101 #ec0101 #ec0101;}
+  60%  {border-color:transparent #016fec #016fec #016fec;}
+  80% {border-color:transparent #01ec5f #01ec5f #01ec5f;}
+  100% {border-color:transparent transparent transparent transparent;}
+}
+
+.countdownCont{
+  text-align: center;
+  top:30%;
+  animation: countdowntrans 1s infinite linear;
+}
+
+@keyframes countdowntrans{
+  from {font-size:40px; opacity:0;}
+  to   {font-size:20px; opacity:1;}
+}
