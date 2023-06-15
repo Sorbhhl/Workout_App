@@ -154,3 +154,28 @@ button:hover{
   from {font-size:40px; opacity:0;}
   to   {font-size:20px; opacity:1;}
 }
+
+/*CSS progress bar*/
+.progressbar-cont{
+  width: 90%;
+}
+
+.progressbar-cont span{
+  float:right
+}
+
+.progressbar {
+  position: relative;
+  height: 20px;
+  border-radius: 1000px;
+  background-color: #484848;
+  clip-path: inset(0 0 0 0 round 1000px);
+}
+
+.progressbar_value {
+  height: 20px;
+  transition: width 0.4s ease-in-out;
+  border-radius: 1000px 0 0 1000px;
+  background-color: #ff4c65;
+  will-change: width;
+}

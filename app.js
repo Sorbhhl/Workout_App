@@ -12,6 +12,10 @@ const timeSelect = document.querySelectorAll('.workout_config button')
 let singleWorkoutDuration = 30;
 let defaultDuration = 300;
 let workoutRepetitions = 2;
+//Full workout progress
+const progressWkValue = document.querySelector('.progressbar_value');
+const progressWk = document.querySelector('progress');
+let progressBarWk = 0;
 
 //Exercises
 let currentWorkoutCont = document.querySelector('.current-workout-img');
@@ -70,6 +74,13 @@ const workoutOnStop = (song, play, displayWorkout, workoutRepetitions) => {
     //changeCurrentWorkout.pause();
     countDownSpan.textContent = '';
     currentWorkout.src = exercises[0];
+    workoutRepetitions = 0;
+}
+
+//Progress bar for the full workout routine
+function setValue(value) {
+    progressWkValue.style.width = `${value}%`;
+    progressWk.value = value;
 }
 
 //Song and timer countdown
@@ -79,6 +90,7 @@ song.ontimeupdate = () => {
     let seconds = '';
     let minutes = '';
     if (currentWorkoutCont.style.display == 'block'){
+        progressupdate();
         seconds = Math.floor(elapsed % 60);
         minutes = Math.floor(elapsed / 60);
     }else{
@@ -88,11 +100,18 @@ song.ontimeupdate = () => {
     }
     //Animate the timeDisplay
     timeDisplay.textContent = `${minutes}:${seconds}`;
-
-    if (currentTime >= singleWorkoutDuration){
+    
+    /*if (currentTime >= singleWorkoutDuration){
         song.currentTime = 0;
-    }
-} 
+    }*/
+}
+
+progressupdate = () => {
+    //Animate the progress bar for the full workout routine
+    let currentTime = song.currentTime;
+    progressBarWk = currentTime*100/defaultDuration;
+    setValue(progressBarWk);
+}
 
 //Change workout exercise every 30 seconds and 7 seconds of rest
 const sleep = async (milliseconds) => {
@@ -134,3 +153,4 @@ const timer = () => {
     }, 1000);
     countDownSpan.textContent = '';
 }
+
