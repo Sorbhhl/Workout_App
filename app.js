@@ -1,15 +1,15 @@
 const song = document.querySelector('.song')
 const play = document.querySelector('.play-btn')
 const displayWorkout = document.querySelector('.current-workout')
-const countDownSpan = document.querySelector('.countdownCont span')
 const countDownContainer = document.querySelector('.cont-countdown-circle')
+const countDownSpan = document.querySelector('.countdownCont span')
 
 //Time display
 const timeDisplay = document.querySelector('.time-display')
 const timeSelect = document.querySelectorAll('.workout_config button')
 
 //Duration
-let fakeDuration = 30;
+let singleWorkoutDuration = 30;
 let defaultDuration = 300;
 let workoutRepetitions = 2;
 
@@ -39,40 +39,58 @@ timeSelect.forEach(option =>{
 
 //Start workout
 play.addEventListener('click', () => {
-    checkPlaying(song, play, displayWorkout, workoutRepetitions);
+    checkPlaying(song);
 })
 
 //function changes on play and stop the workout
-const checkPlaying = (song, play, displayWorkout, workoutRepetitions) =>{
+const checkPlaying = (song) =>{
     if(song.paused) {
-        song.play();
-        play.classList.add("play-btn-on-pause");
-        play.textContent = "◼"
-        displayWorkout.style.height = "75%";
-        changeCurrentWorkout(workoutRepetitions);
+        workoutOnStart(song, play, displayWorkout, workoutRepetitions);
     }else{
-        song.pause();
-        play.classList.remove("play-btn-on-pause");
-        play.textContent = "▶"
-        displayWorkout.style.height = "0%";
-        restartWorkout = 0;
-        //Restart workout
+        workoutOnStop(song, play, displayWorkout, workoutRepetitions);
     }
+}
+
+const workoutOnStart = (song, play, displayWorkout, workoutRepetitions) => {
+    //Start song and workout
+    song.play();
+    play.classList.add("play-btn-on-pause");
+    play.textContent = "◼"
+    displayWorkout.style.height = "75%";
+    changeCurrentWorkout(workoutRepetitions);
+}
+
+const workoutOnStop = (song, play, displayWorkout, workoutRepetitions) => {
+    //Stop song and workout
+    song.pause();
+    play.classList.remove("play-btn-on-pause");
+    play.textContent = "▶"
+    displayWorkout.style.height = "0%";
+    //Restart workout
+    //changeCurrentWorkout.pause();
+    countDownSpan.textContent = '';
+    currentWorkout.src = exercises[0];
 }
 
 //Song and timer countdown
 song.ontimeupdate = () => {
     let currentTime = song.currentTime;
-    let elapsed = fakeDuration - currentTime;
-    let seconds = Math.floor(elapsed % 60);
-    let minutes = Math.floor(elapsed / 60);
+    let elapsed = singleWorkoutDuration - currentTime;
+    let seconds = '';
+    let minutes = '';
+    if (currentWorkoutCont.style.display == 'block'){
+        seconds = Math.floor(elapsed % 60);
+        minutes = Math.floor(elapsed / 60);
+    }else{
+        song.currentTime = 0;
+        seconds = '00';
+        minutes = '0'
+    }
     //Animate the timeDisplay
     timeDisplay.textContent = `${minutes}:${seconds}`;
 
-    if (currentTime >= fakeDuration){
-        song.pause();
+    if (currentTime >= singleWorkoutDuration){
         song.currentTime = 0;
-        //play.src = ''
     }
 } 
 
@@ -84,23 +102,23 @@ const sleep = async (milliseconds) => {
 };
 
 const changeCurrentWorkout = async (workoutRepetitions) =>{
-    currentWorkout.src = exercises[0];
     for (let i=0 ; i<workoutRepetitions; i++){
-        currentWorkout.src = exercises[0];
         for (let i=0 ; i<5 ; i++){
             //3, 2, 1 Go!
             currentWorkoutCont.style.display = 'none';
-            timeDisplay.style.display = 'none';
+            //timeDisplay.style.display = 'none';
             countDownContainer.style.display = 'block';
             timer();
             await sleep(7000);
             //Start the workout!        
             currentWorkout.src = exercises[i];
-            song.currentTime = 0;
             currentWorkoutCont.style.display = 'block';
             timeDisplay.style.display = 'block';
             countDownContainer.style.display = 'none';
             await sleep(5000);
+            if(play.textContent == "▶"){
+                return
+            }
         }
     }
 }
@@ -115,4 +133,4 @@ const timer = () => {
         if (counter == -1) clearInterval(timer);
     }, 1000);
     countDownSpan.textContent = '';
-}  
+}
