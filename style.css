@@ -10,6 +10,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
+    background-color: white;
 }
 
 .workout_config,
@@ -24,7 +25,7 @@
 }
 
 .workout_config{
-    background-color:lightskyblue
+    background-color:#fff3e6;
 }
 
 .workout {
@@ -32,44 +33,148 @@
 }
 
 .sound_config{
-    background-color: aliceblue;
+    background-color:#ffe3df;
 }
 
+/*Left section*/
+button{
+  padding:15px 25px;
+  border-radius:30px;
+  background:rgb(199, 22, 31, 0.4);
+  border: 0;
+  color:white;
+  box-shadow: 0px 5px 5px 0px rgba(76,76,76,0.2);
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size:12px;
+  text-shadow: 1px 1px 2px rgba(76,76,76,0.6);
+}
+
+button:hover{
+  background-color:#c7161f;
+  box-shadow: 0px 0px 25px 4px rgba(110, 110, 110, 0.1);
+  transition: all 0.5s ease;
+}
+
+/*Middle section*/
+/*Progress bar*/
+.progressbar-cont{
+  width: 90%;
+}
+
+.progressbar-cont span{
+  float:right
+}
+
+.progressbar {
+  position: relative;
+  height: 20px;
+  border-radius: 1000px;
+  background-color: #484848;
+  clip-path: inset(0 0 0 0 round 1000px);
+}
+
+.progressbar_value {
+  height: 20px;
+  transition: width 0.4s ease-in-out;
+  border-radius: 1000px 0 0 1000px;
+  background-color: #E45825;
+  will-change: width;
+}
+
+/*Timer*/
 .time-display{
-    color: lightcoral;
+    color: #E45825;
     font-size:40px;
     text-align:center;
 }
 
+/*Workouts*/
 .current-workout{
-    height:0%;
-    overflow:hidden;
-    -webkit-transition: all 1s ease 0.5s;
-    -moz-transition: all 1s ease 0.5s;
-    -o-transition: all 1s ease 0.5s;
-    transition: all 1s ease 0.5s;
+  height:0%;
+  overflow:hidden;
+  -webkit-transition: all 1s ease 0.5s;
+  -moz-transition: all 1s ease 0.5s;
+  -o-transition: all 1s ease 0.5s;
+  transition: all 1s ease 0.5s;
 }
 
+/* Get ready section */
+.get-ready-cont{
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+}
+
+/* Countdown to start circle */
+.cont-countdown-circle{
+  position:relative;
+  top:25%;
+  left:25%;
+  width: 150px;
+  height:150px;
+  display:none;
+}
+
+.cont-countdown-circle div{
+  position:absolute;
+  width: 65%;
+  height:65%;
+}
+
+.countdown-b-circle-outer{
+  border-radius:100%;
+  border:5px solid;
+}
+
+.countdown-b-circle-start {
+  border-color:transparent #ecd201 #ecd201 #ecd201;
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.countdown-circle {
+  animation: rotation 1s infinite linear,
+  colorchange 7s infinite linear;
+}
+
+.countdownCont{
+  text-align: center;
+  top:20%;
+  animation: countdowntrans 1s infinite linear;
+}
+
+@keyframes rotation{
+  from {-webkit-transform: rotate(0deg);transform: rotate(0deg);}
+  to   {-webkit-transform: rotate(359deg);transform: rotate(359deg);}
+}
+
+@keyframes colorchange{
+  0%   {border-color:transparent #ecd201 #ecd201 #ecd201;}
+  20%  {border-color:transparent #ec0101 #ec0101 #ec0101;}
+  60%  {border-color:transparent #016fec #016fec #016fec;}
+  80% {border-color:transparent #01ec5f #01ec5f #01ec5f;}
+  100% {border-color:transparent transparent transparent transparent;}
+}
+
+@keyframes countdowntrans{
+  from {font-size:40px; opacity:0;}
+  to   {font-size:20px; opacity:1;}
+}
+
+/* Gifs */
 .current-workout-img img{
-    width: 100%;
+  height:200px;
+  width: 100%;
 }
 
-button{
-    padding:10px;
-    border-radius:4px;
-    background-color:rgba(255, 255, 255, 0.8);
-    border: 1px solid #4c4c4c;
-    color:#4c4c4c;
-}
-
-button:hover{
-    background-color:rgb(110, 110, 110, 0.2);
-    box-shadow: 0px 0px 25px 4px rgba(110, 110, 110, 0.1);
-    transition: all 0.5s ease;
-}
-
+/*Play button*/
 .play-btn {
-    background:coral;
+    background:#E45825;
     border-radius: 50%;
     box-shadow: 0px 0px 25px 3px rgba(255, 128, 82, 0.8);
     color:white;
@@ -93,89 +198,5 @@ button:hover{
 /* btn hover */
 .play-btn:hover{
     box-shadow: 0px 0px 50px 3px rgba(255, 97, 40, 0.8);
-    background: #e45825;
-}
-
-
-/*Animation circle countdown */
-.cont-countdown-circle{
-  position:relative;
-  top:25%;
-  width: 100px;
-  height:100px;
-  display:none;
-}
-
-.cont-countdown-circle div{
-  position:absolute;
-  width: 100%;
-  height:100%;
-}
-
-.countdown-b-circle-outer{
-  border-radius:100%;
-  border:5px solid;
-}
-
-.countdown-b-circle-start {
-  border-color:transparent #ecd201 #ecd201 #ecd201;
-  -webkit-transform: rotate(45deg);
-  -moz-transform: rotate(45deg);
-  -ms-transform: rotate(45deg);
-  -o-transform: rotate(45deg);
-  transform: rotate(45deg);
-}
-
-.countdown-circle {
-  animation: rotation 1s infinite linear,
-  colorchange 5s infinite linear;
-}
-
-@keyframes rotation{
-  from {-webkit-transform: rotate(0deg);transform: rotate(0deg);}
-  to   {-webkit-transform: rotate(359deg);transform: rotate(359deg);}
-}
-
-@keyframes colorchange{
-  0%   {border-color:transparent #ecd201 #ecd201 #ecd201;}
-  20%  {border-color:transparent #ec0101 #ec0101 #ec0101;}
-  60%  {border-color:transparent #016fec #016fec #016fec;}
-  80% {border-color:transparent #01ec5f #01ec5f #01ec5f;}
-  100% {border-color:transparent transparent transparent transparent;}
-}
-
-.countdownCont{
-  text-align: center;
-  top:30%;
-  animation: countdowntrans 1s infinite linear;
-}
-
-@keyframes countdowntrans{
-  from {font-size:40px; opacity:0;}
-  to   {font-size:20px; opacity:1;}
-}
-
-/*CSS progress bar*/
-.progressbar-cont{
-  width: 90%;
-}
-
-.progressbar-cont span{
-  float:right
-}
-
-.progressbar {
-  position: relative;
-  height: 20px;
-  border-radius: 1000px;
-  background-color: #484848;
-  clip-path: inset(0 0 0 0 round 1000px);
-}
-
-.progressbar_value {
-  height: 20px;
-  transition: width 0.4s ease-in-out;
-  border-radius: 1000px 0 0 1000px;
-  background-color: #ff4c65;
-  will-change: width;
+    background: #E45825;
 }
