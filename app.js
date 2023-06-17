@@ -80,31 +80,11 @@ const workoutOnStop = (song, play, displayWorkout, workoutRepetitions) => {
     play.textContent = "▶"
     displayWorkout.style.height = "0%";
     //Restart workout
-    //changeCurrentWorkout.pause();
     countDownSpan.textContent = '';
     currentWorkout.src = exercises[0];
     workoutRepetitions = 0;
     //Progress bar stop
     initialBarTime = 0;
-}
-
-//Song and timer countdown
-song.ontimeupdate = () => {
-    let currentTime = song.currentTime;
-    let elapsed = singleWorkoutDuration - currentTime;
-    let seconds = '';
-    let minutes = '';
-    progressupdate();
-    if (currentWorkoutCont.style.display == 'block'){
-        seconds = Math.floor(elapsed % 60);
-        minutes = Math.floor(elapsed / 60);
-    }else{
-        song.currentTime = 0;
-        seconds = '00';
-        minutes = '0'
-    }
-    //Animate the timeDisplay
-    timeDisplay.textContent = `${minutes}:${seconds}`;
 }
 
 //Progress bar for the full workout routine
@@ -121,7 +101,7 @@ const progressupdate = () => {
 
 const updateProgressValue = () => {
     if (initialBarTime == 100) clearInterval(this);
-    else console.log('Currently at ' + (initialBarTime++));
+    else initialBarTime++;
 }
 
 //Change workout exercise every 30 seconds and 7 seconds of rest
@@ -136,14 +116,14 @@ const changeCurrentWorkout = async (workoutRepetitions) =>{
         for (let i=0 ; i<5 ; i++){
             //3, 2, 1 Go!
             currentWorkoutCont.style.display = 'none';
-            //timeDisplay.style.display = 'none';
             countDownContainer.style.display = 'block';
             timer();
             await sleep(7000);
-            //Start the workout!      
+            //Start the workout!     
+            let workoutCounter = 30;
+            workoutTimer(workoutCounter); 
             currentWorkout.src = exercises[i];
             currentWorkoutCont.style.display = 'block';
-            timeDisplay.style.display = 'block';
             countDownContainer.style.display = 'none';
             await sleep(5000);
             if(play.textContent == "▶"){
@@ -151,6 +131,16 @@ const changeCurrentWorkout = async (workoutRepetitions) =>{
             }
         }
     }
+}
+
+//Exercises counter
+const workoutTimer = (workoutCounter) => {
+    let workoutTimer = setInterval( () => {
+        timeDisplay.textContent = `0:${workoutCounter}`
+        workoutCounter--;
+        console.log(workoutCounter)
+        if (workoutCounter == -1) clearInterval(workoutTimer);
+    }, 1000)
 }
 
 //Counter between exercises
