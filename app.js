@@ -5,6 +5,7 @@ const countDownContainer = document.querySelector('.cont-countdown-circle')
 const countDownSpan = document.querySelector('.countdownCont span')
 const barValFullWk = document.querySelector('.bar-value-full-wk')
 const getReadyContainer = document.querySelector('.get-ready-cont')
+const muteOnAndOffBtn = document.querySelector('.btn-image-sound')
 
 //Time display
 const timeDisplay = document.querySelector('.time-display')
@@ -12,7 +13,7 @@ const timeSelect = document.querySelectorAll('.workout_config button')
 
 //Duration
 let singleWorkoutDuration = 30;
-let defaultDuration = 300;
+let defaultDuration = 148;
 let workoutRepetitions = 2;
 //Full workout progress
 const progressWkValue = document.querySelector('.progressbar_value');
@@ -25,7 +26,6 @@ let currentWorkout = document.querySelector('.current-workout-img img');
 const exercises =["./resources/gifs/a93c82108677535.5fc3684e78f67.gif",
     "./resources/gifs/c700df108677535.5fc364926db90.gif",
     "./resources/gifs/3dec53108677535.5fc364926eaa1.gif",
-    "./resources/gifs/47a59d108677535.62c7ebd2c9907.gif",
     "./resources/gifs/a258b2108677535.5fc364926e4a7.gif"
 ]
 
@@ -33,15 +33,24 @@ const exercises =["./resources/gifs/a93c82108677535.5fc3684e78f67.gif",
 timeSelect.forEach(option =>{
     option.addEventListener('click', function() {
         defaultDuration = this.getAttribute('data-time');
-        if (defaultDuration == 370){ //300 seconds (5 minutes) + 7 seconds of rest each workout (70 seconds)
+        if (defaultDuration == 156){ // 120 seconds (2 minutes) + 9 seconds rest each workout (36 seconds)
+            workoutRepetitions = 1
+            barValFullWk.textContent = '2,5 minutes'
+            timeSelect[0].classList.add('active')
+            timeSelect[1].classList.remove('active')
+            timeSelect[2].classList.remove('active')
+        }else if(defaultDuration == 372){ //300 seconds (5 minutes) + 9 seconds of rest each workout (72 seconds)
             workoutRepetitions = 2
             barValFullWk.textContent = '6 minutes'
-        }else if(defaultDuration == 740){ //600 seconds (10 minutes) + 7 seconds of rest each workout (140 seconds)
+            timeSelect[0].classList.remove('active')
+            timeSelect[1].classList.add('active')
+            timeSelect[2].classList.remove('active')
+        }else{ //600 seconds (10 minutes) + 9 seconds of rest each workout (144 seconds)
             workoutRepetitions = 4
             barValFullWk.textContent = '12 minutes'
-        }else{ //900 seconds (15 minutes) + 7 seconds of rest each workout (210 seconds)
-            workoutRepetitions = 6
-            barValFullWk.textContent = '18 minutes'
+            timeSelect[0].classList.remove('active')
+            timeSelect[1].classList.remove('active')
+            timeSelect[2].classList.add('active')
         }    
     })
 })
@@ -49,6 +58,16 @@ timeSelect.forEach(option =>{
 //Start workout
 play.addEventListener('click', () => {
     checkPlaying(song);
+})
+
+muteOnAndOffBtn.addEventListener('click', () => {
+    if (song.muted){
+        song.muted = false;
+        muteOnAndOffBtn.classList.remove("btn-image-sound-muted");
+    }else{
+        song.muted = true;
+        muteOnAndOffBtn.classList.add("btn-image-sound-muted");
+    }
 })
 
 //function changes on play and stop the workout
@@ -65,7 +84,7 @@ const workoutOnStart = (song, play, displayWorkout, workoutRepetitions) => {
     song.play();
     play.classList.add("play-btn-on-pause");
     play.textContent = "◼"
-    displayWorkout.style.height = "75%";
+    displayWorkout.style.height = "65%";
     changeCurrentWorkout(workoutRepetitions);
     timeSelect[0].disabled = true;
     timeSelect[1].disabled = true;
@@ -109,8 +128,8 @@ const sleep = async (milliseconds) => {
 };
 
 const changeCurrentWorkout = async (workoutRepetitions) =>{
-    for (let n=0 ; n<workoutRepetitions; n++){
-        for (let i=0 ; i<5 ; i++){
+    for (let n=1 ; n<workoutRepetitions; n++){
+        for (let i=0 ; i<4 ; i++){
             //3, 2, 1 Go!
             currentWorkout.src = exercises[i];
             currentWorkout.style.height = '200px';
@@ -122,17 +141,20 @@ const changeCurrentWorkout = async (workoutRepetitions) =>{
             let workoutCounter = 30;
             workoutTimer(workoutCounter); 
             getReadyContainer.style.display = 'none';
-            await sleep(5000);
+            await sleep(32000);
             if(play.textContent == "▶"){
                 return
             }
         }
-        console.log(`Workout round: ${n+1}`)
+        console.log(`Workout round: ${n}`)
     }
     currentWorkout.src = './resources/gifs/congrats.gif';
-    await sleep(3000);
+    await sleep(1000);
     play.textContent = "Restart workout"
+    song.pause()
 }
+
+
 
 //Exercises counter
 const workoutTimer = (workoutCounter) => {

@@ -13,9 +13,9 @@
      -->
     <div class="app">
         <div class="workout_config">
-            <button data-time="370">6 minutes</button>
-            <button data-time="740">12 minutes</button>
-            <button data-time="1110">18 minutes</button>
+            <button data-time="156" class="active">2,5 minutes</button>
+            <button data-time="372">6 minutes</button>
+            <button data-time="744">12 minutes</button>
         </div>
         <div class="workout">
             <div class="progressbar-cont">
@@ -23,7 +23,7 @@
                     <div class="progressbar_value"></div>
                     <progress value="0" max="100">100%</progress>
                 </div>
-                <span class="bar-value-full-wk">5 minutes</span>
+                <span class="bar-value-full-wk">2,5 minutes</span>
             </div>
             <div>
                 <h3 class="time-display">0:00</h3>
@@ -47,23 +47,18 @@
             <audio src="./resources/sounds/funkyelement.mp3" class="song"></audio> 
         </div>
         <div class="sound_config">
-            <button data-sound="./resources/sounds/funkyelement.mp3">
-                <!-- data-video="./resources/video/" -->
-                Music and sonds on / Option 1
+            <button class="btn-image-sound" data-sound="./resources/sounds/funkyelement.mp3">
+                <img src="./resources/gifs/sound-2935466_1280.png" alt="btn-img-sound"/>
             </button>
-            <button data-sound="./resources/sounds/funkyelement.mp3">
-                <!-- data-video="./resources/video/" -->
-                Music and sounds on / Option 2
-            </button>
-            <button data-sound="">
-                <!-- data-video="./resources/video/" -->
-                Music off / Sound on
-            </button>
-            <button data-sound="">
-                <!-- data-video="./resources/video/" -->
-                Mute all
-            </button>
-            <div></div>
+            <div class="card">
+                <h3>Workout App</h3>
+                <p>Configurable and responsive workout routine on your own home! Made with Vanilla Javascript, HTML, and CSS by Soraya Ben.</p>
+                <ul>Set your workout duration:
+                    <li><b>2,5 minutes:</b> Around 2,5 minutes - 4 exercises - x1 repetition</li>
+                    <li><b>6 minutes:</b> Around 6 minutes - 4 exercises - x2 repetitions</li>
+                    <li><b>12 minutes:</b> Around 12 minutes - 4 exercises - x4 repetitions</li>
+                </ul>
+            </div>
         </div>
     </div>
     <script src="./app.js"></script>

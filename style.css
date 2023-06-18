@@ -3,6 +3,7 @@
     padding:0;
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    color:#4c4c4c;
 }
 
 .app{
@@ -25,15 +26,16 @@
 }
 
 .workout_config{
-    background-color:#fff3e6;
+    background-color:#ffe3df;
 }
 
 .workout {
     background-color: white;
+    flex-grow: 2;
 }
 
 .sound_config{
-    background-color:#ffe3df;
+    background-color:#fff3e6;
 }
 
 /*Left section*/
@@ -54,6 +56,14 @@ button:hover{
   background-color:#c7161f;
   box-shadow: 0px 0px 25px 4px rgba(110, 110, 110, 0.1);
   transition: all 0.5s ease;
+}
+
+button.active{
+  background-color:#c7161f;
+}
+
+button:disabled{
+  background: darkgrey;
 }
 
 /*Middle section*/
@@ -84,7 +94,7 @@ button:hover{
 
 /*Timer*/
 .time-display{
-    color: #E45825;
+    color: #c7161f;
     font-size:40px;
     text-align:center;
 }
@@ -170,6 +180,7 @@ button:hover{
 .current-workout-img img{
   height:200px;
   width: 100%;
+  max-width: 500px;
 }
 
 /*Play button*/
@@ -199,4 +210,116 @@ button:hover{
 .play-btn:hover{
     box-shadow: 0px 0px 50px 3px rgba(255, 97, 40, 0.8);
     background: #E45825;
+}
+
+/*Right section */
+.btn-image-sound{
+  width: 80px;
+  height: 80px;
+  padding: 5px;
+  overflow: hidden;
+  border-radius:50%;
+}
+
+.btn-image-sound:hover{
+  background: linear-gradient(to top left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 3px),
+  rgba(0,0,0,1) 50%,rgba(0,0,0,0) calc(50% + 3px), rgba(0,0,0,0) 100%);
+}
+
+.btn-image-sound img{
+  opacity: 0.6;
+  width:200%;
+  position: relative;
+  bottom: 50%;
+  right:50%;
+}
+
+.btn-image-sound-muted{
+  background: linear-gradient(to top left, rgba(0,0,0,0) 0%, rgba(0,0,0,0) calc(50% - 3px),
+  rgba(0,0,0,1) 50%,rgba(0,0,0,0) calc(50% + 3px), rgba(0,0,0,0) 100%);
+}
+
+.btn-image-sound-muted:hover{
+  background: transparent;
+}
+
+/*Card*/
+.card{
+  background:#ffe3df;
+  padding:20px;
+  margin:20px;
+}
+
+.card p, .card ul{
+  font-size:14px;
+  margin: 20px 10px;
+}
+
+.card ul li{
+  margin:10px 
+}
+
+/* For smaller screens */
+@media only screen and (max-width: 900px) {
+  .app{
+    flex-direction: column;
+    align-items: inherit;
+    justify-content: flex-start;
+  }
+
+  .workout_config{
+    flex-direction: row;
+  }
+
+  .workout_config, .workout, .sound_config{
+    padding:15px
+  }
+
+  .workout{
+    flex-basis: auto;
+  }
+
+  .time-display{
+    font-size:26px
+  }
+
+  .progressbar-cont span{
+    font-size: 12px;
+  }
+
+  .progressbar, .progressbar_value{
+    height:16px
+  }
+
+  .cont-countdown-circle{
+    width:120px;
+    height:120px;
+    left:30%;
+  }
+
+  h3{
+    font-size:14px
+  }
+
+  .countdownCont span{
+    font-size:26px
+  }
+
+  .current-workout-img img{
+    max-width: 340px;
+  }
+
+  .current-workout-img{
+    margin-bottom: 100px;
+  }
+
+  button{
+    padding:10px 20px;
+    font-size:10px;
+  }
+
+  .btn-image-sound{
+    width: 65px;
+    height:65px;
+  }
 }
