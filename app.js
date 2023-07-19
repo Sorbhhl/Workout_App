@@ -13,7 +13,7 @@ const timeSelect = document.querySelectorAll('.workout_config button')
 
 //Duration
 let singleWorkoutDuration = 30;
-let defaultDuration = 148;
+let defaultDuration = 156;
 let workoutRepetitions = 2;
 //Full workout progress
 const progressWkValue = document.querySelector('.progressbar_value');
@@ -128,7 +128,7 @@ const sleep = async (milliseconds) => {
 };
 
 const changeCurrentWorkout = async (workoutRepetitions) =>{
-    for (let n=1 ; n<workoutRepetitions; n++){
+    for (let n=0 ; n<workoutRepetitions; n++){
         for (let i=0 ; i<4 ; i++){
             //3, 2, 1 Go!
             currentWorkout.src = exercises[i];
